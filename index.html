@@ -12,57 +12,59 @@
     </header>
     <main>
       <section class="profile">
-        <img class = "profile__avatar" src = "./images/avatar.jpg"  alt="Аватар">
-        <div class="profile__info">
-          <div class="profile__main">
-            <h1 class="profile__title">Жак-Ив Кусто</h1>
-            <button class="profile__edit-button"><img class="profile__edit-button-immage" src="./images/Button_pen.svg" alt="Картинка кнопки"></button>
+        <div class='profile__basic'>
+          <img class = "profile__avatar" src = "./images/avatar.jpg"  alt="Аватар">
+          <div class="profile__info">
+            <div class="profile__main">
+              <h1 class="profile__title">Жак-Ив Кусто</h1>
+              <button class="profile__edit-button"></button>
+            </div>
+            <h2 class="profile__subtitle">Исследователь океана</h2>
           </div>
-          <h2 class="profile__subtitle">Исследователь океана</h2>
         </div>
-        <button class="profile__add-button"><img class="profile__add-button-immage" src="./images/Button_plus.svg" alt="Картинка кнопки"></button>
+        <button class="profile__add-button"><img class="profile__add-buttonimmage" src="./images/Button_plus.svg" alt="Картинка кнопки"></button>
       </section>
       <section class="elements">
         <div class="element">
           <img class = "element__photo" src = "./images/Karachaevsk.jpg"  alt="Фото">
           <div class="element__text-block">
             <p class="element__text">Карачаевск</p>
-            <img class = "elemeny__like" src = "./images/head_disabled.svg"  alt="Значок лайка">
+            <button class = "element__like"></button>
           </div>
         </div>
         <div class="element">
           <img class = "element__photo" src = "./images/Elbrus.jpg"  alt="Фото">
           <div class="element__text-block">
             <p class="element__text">Гора Эльбрус</p>
-            <img class = "elemeny__like" src = "./images/head_disabled.svg"  alt="Значок лайка">
+            <button class = "element__like"></button>
           </div>
         </div>
         <div class="element">
           <img class = "element__photo" src = "./images/Dombay.jpg"  alt="Фото">
           <div class="element__text-block">
             <p class="element__text">Домбай</p>
-            <img class = "elemeny__like" src = "./images/head_disabled.svg"  alt="Значок лайка">
+            <button class = "element__like"></button>
           </div>
         </div>
         <div class="element">
           <img class = "element__photo" src = "./images/Elbrus.jpg"  alt="Фото">
           <div class="element__text-block">
             <p class="element__text">Гора Эльбрус</p>
-            <img class = "elemeny__like" src = "./images/head_disabled.svg"  alt="Значок лайка">
+            <button class = "element__like"></button>
           </div>
         </div>
         <div class="element">
           <img class = "element__photo" src = "./images/Dombay.jpg"  alt="Фото">
           <div class="element__text-block">
             <p class="element__text">Домбай</p>
-            <img class = "elemeny__like" src = "./images/head_disabled.svg"  alt="Значок лайка">
+            <button class = "element__like"></button>
           </div>
         </div>
         <div class="element">
           <img class = "element__photo" src = "./images/Karachaevsk.jpg"  alt="Фото">
           <div class="element__text-block">
             <p class="element__text">Карачаево-Черкесия</p>
-            <img class = "elemeny__like" src = "./images/head_disabled.svg"  alt="Значок лайка">
+            <button class = "element__like"></button>
           </div>
         </div>
       </section>
@@ -71,5 +73,17 @@
         <p class="footer__text">&#169 2020 Mesto Russia</p>
       </footer>
   </div>
+  <section class="popup">
+    <div class="popup__container">
+      <button class="popup__close"></button>
+      <h2 class="popup__title">Редактировать профиль</h2>
+      <form class="popup__form">
+        <input type="text" class="popup__name" placeholder="ФИО">
+        <input type="text" class="popup__name" placeholder="Род деятельности">
+      </form>
+      <button class="popup__save">Сохранить</button>
+    </div>
+  </section>
+  <script src="script/index.js"></script>
 </body>
 </html>

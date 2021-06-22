@@ -1,0 +1,9 @@
+.profile__main {
+    display: flex;
+}
+@media screen and (max-width: 950px) {
+    .profile__main {
+        position: relative;
+        margin: 0 28px 0;
+    }
+}
