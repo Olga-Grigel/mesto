@@ -3,7 +3,6 @@
     height: 48px;
     background: url(../../../images/Button_close_form.svg);
     background-position: center;
-    transition: 0.3s;
     position: absolute;
     border: none;
     top: -48px;
