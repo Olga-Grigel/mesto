@@ -1,38 +1,38 @@
-const EditButton = document.querySelector(".profile__edit-button");
-const popupElement = document.querySelector('.popup')
-const CloseButton = popupElement.querySelector('.popup__close')
+const ProfileEditButton = document.querySelector(".profile__edit-button");
+const Popup = document.querySelector('.popup')
+const PopupClose = Popup.querySelector('.popup__close')
 
 const openPopup = function() {
-  popupElement.classList.add('popup_opened')
-  inputs[0].value = Name.textContent;
-  inputs[1].value = Profession.textContent;
+  Popup.classList.add('popup_opened')
+  Input[0].value = ProfileTitle.textContent;
+  Input[1].value = ProfileSubtitle.textContent;
 }
 
 const closePopup = function() {
-  popupElement.classList.remove('popup_opened')
-  inputs[0].value = Name.textContent;
-  inputs[1].value = Profession.textContent;
+  Popup.classList.remove('popup_opened')
+  Input[0].value = '';
+  Input[1].value = '';
 }
 
-EditButton.addEventListener('click', openPopup);
-CloseButton.addEventListener('click', closePopup);
+ProfileEditButton.addEventListener('click', openPopup);
+PopupClose.addEventListener('click', closePopup);
 
 
-const inputs = popupElement.querySelectorAll('input');
-const Name = document.querySelector ('.profile__title');
-const Profession = document.querySelector ('.profile__subtitle');
+const Input = Popup.querySelectorAll('input');
+const ProfileTitle = document.querySelector ('.profile__title');
+const ProfileSubtitle = document.querySelector ('.profile__subtitle');
 
-const SaveButton = popupElement.querySelector ('.popup__save');
+const SaveButton = Popup.querySelector ('.popup__save');
 
-function SaveButtonSave(evt){
+function Save(evt){
   evt.preventDefault();
-  Name.textContent = inputs[0].value;
-  Profession.textContent = inputs[1].value;
+  ProfileTitle.textContent = Input[0].value;
+  ProfileSubtitle.textContent = Input[1].value;
   closePopup ();
 }
 
-const popupForm = popupElement.querySelector('.popup__form')
+const popupForm = Popup.querySelector('.popup__form')
 
-popupForm.addEventListener('submit', SaveButtonSave);
+popupForm.addEventListener('submit', Save);
 
 

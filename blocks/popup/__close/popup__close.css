@@ -18,11 +18,10 @@
 
 @media screen and (max-width: 620px) {
     .popup__close {
-        background: url(../../../images/Button_close_form.svg);
+        background-size: 40px 40px;
         width: 26px;
         height: 26px;
         right: 5px;
         top: -47px;
-        background-position: center;
     }
 }
