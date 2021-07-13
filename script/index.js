@@ -1,4 +1,4 @@
-//Открытие/Закрытие попапа:
+//Открытие/Закрытие попапа профиля:
 
 const ProfileEditButton = document.querySelector(".profile__edit-button");
 const Popup = document.querySelector('.popup')
@@ -27,8 +27,6 @@ PopupClose.addEventListener('click', closePopup);
 const Input = Popup.querySelectorAll('input');
 const ProfileTitle = document.querySelector ('.profile__title');
 const ProfileSubtitle = document.querySelector ('.profile__subtitle');
-
-const SaveButton = Popup.querySelector ('.popup__save');
 
 function Save(evt){
   evt.preventDefault();
