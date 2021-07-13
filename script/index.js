@@ -143,6 +143,7 @@ elements.addEventListener('click', LikeActive);
 
 const PopupPhoto=document.querySelector('.popup-photo');
 const popupPhotoClose=PopupPhoto.querySelector('.popup-photo__close');
+
 const OpenPhoto = function(event) {
   if(event.target.className!=='element__photo'){
     return
@@ -160,9 +161,13 @@ popupPhotoClose.addEventListener('click', closePhoto)
 
 //    подстановка текста и фото, которые открываются:
 
-const InsernPhotoAndTextToPopap=function(event) {
-  event.target.textContent
-}
 
+const InsernPhotoAndTextToPopap=(event)=> {
+  const popupPhotoText=PopupPhoto.querySelector('.popup-photo__text');
+  const popupPhotoPhoto=PopupPhoto.querySelector('.popup-photo__photo');
+
+  popupPhotoText.textContent=event.target.nextElementSibling.textContent;
+  popupPhotoPhoto.setAttribute('src', event.target.getAttribute('src'));
+}
 elements.addEventListener('click', InsernPhotoAndTextToPopap);
 
