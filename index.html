@@ -27,14 +27,14 @@
     <footer class="footer">
       <p class="footer__text">&#169; 2020 Mesto Russia</p>
     </footer>
-    <section class="popup">
-      <div class="popup__container">
-        <button type="button" class="popup__close"></button>
-        <h2 class="popup__title">Редактировать профиль</h2>
-        <form class="popup__form" name="popup__form">
-          <input type="text" name="Fname" class="popup__name" placeholder="ФИО">
-          <input type="text" name="activiti" class="popup__name" placeholder="Род деятельности">
-          <button type="submit" class="popup__save">Сохранить</button>
+    <section class="popup popup_change_profile">
+      <div class="popup__container popup__container_change_profile">
+        <button type="button" class="popup__close popup__close_change_profile"></button>
+        <h2 class="popup__title popup__title_change_profile">Редактировать профиль</h2>
+        <form class="popup__form popup__form_change_profile" name="popup__form">
+          <input type="text" name="name" class="popup__name popup__name_change_profile" placeholder="ФИО" required>
+          <input type="text" name="activiti" class="popup__name popup__name_change_profile" placeholder="Род деятельности" required>
+          <button type="submit" class="popup__save popup__save_change_profile">Сохранить</button>
         </form>
       </div>
     </section>
@@ -43,17 +43,17 @@
         <button type="button" class="popup__close popup__close_add_element"></button>
         <h2 class="popup__title popup__title_add_element">Новое место</h2>
         <form class="popup__form popup__form_add_element" name="popup__form_add_element">
-          <input type="text" name="Fname" class="popup__name popup__name_add_element" placeholder="Название">
-          <input type="url" name="link" class="popup__name popup__name_add_element" placeholder="Ссылка на картинку">
+          <input type="text" name="title" class="popup__name popup__name_add_element" placeholder="Название" required>
+          <input type="url" name="link" class="popup__name popup__name_add_element" placeholder="Ссылка на картинку" required>
           <button type="submit" class="popup__save popup__save_add_element">Сохранить</button>
         </form>
       </div>
     </section>
-    <section class="popup-photo">
-      <div class="popup-photo__container">
-        <button type="button" class="popup-photo__close"></button>
-        <img  class="popup-photo__photo" src="#" alt="Фото">
-        <h2 class="popup-photo__text"></h2>
+    <section class="popup popup_open_photo">
+      <div class="popup__container popup__container_open_photo popup-photo__container">
+        <button type="button" class="popup__close popup__close_open_photo popup-photo__close"></button>
+        <img  class="popup__photo popup__photo_open_photo popup-photo__photo" src="#" alt="Фото">
+        <h2 class="popup__text popup__text_open_photo popup-photo__text"></h2>
       </div>
     </section>
     <template id="element-template">
@@ -67,5 +67,6 @@
       </div>
     </template>
     <script src="script/index.js"></script>
+    <script src="script/validate.js"></script>
   </body>
 </html>
