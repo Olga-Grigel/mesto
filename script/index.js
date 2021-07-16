@@ -129,24 +129,3 @@ popupCloseOpenPhoto.addEventListener('click', ()=>{
 })
 
 popupFormAddElement.addEventListener('submit', saveAddElement);
-
-//Закрытие попапщв по клику на оверлей и при нажатии на кнопку ESC
-
-const closePopupClickOverlayAndEsc=(elementPopup)=>{
-  elementPopup.addEventListener('click', (event)=>{
-    if (event.target !== event.currentTarget) {
-      return;
-    } else{
-      closePopup(elementPopup);
-    }
-  });
-  document.addEventListener('keyup', function(event) {
-    if (event.key === 'Escape') {
-      closePopup(elementPopup);
-    }
-  });
-};
-
-closePopupClickOverlayAndEsc(popupChangeProfile);
-closePopupClickOverlayAndEsc(popupAddElement);
-closePopupClickOverlayAndEsc(popupOpenPhoto);
