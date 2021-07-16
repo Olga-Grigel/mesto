@@ -6,6 +6,8 @@ const popupCloseChangeProfile = popupChangeProfile.querySelector('.popup__close_
 const popupFormChangeProfile = popupChangeProfile.querySelector('.popup__form_change_profile');
 const profileTitle = document.querySelector ('.profile__title');
 const profileSubtitle = document.querySelector ('.profile__subtitle');
+const profileNameInput=popupFormChangeProfile.elements.name;
+const profileActivitiInput=popupFormChangeProfile.elements.activiti
 
 const openPopup = function(elementPopup){
   elementPopup.classList.add('popup_opened');
@@ -13,8 +15,8 @@ const openPopup = function(elementPopup){
 
 const openPopupProfile = function(){
   openPopup(popupChangeProfile);
-  popupFormChangeProfile.elements.name.value = profileTitle.textContent;
-  popupFormChangeProfile.elements.activiti.value = profileSubtitle.textContent;
+  profileNameInput.value = profileTitle.textContent;
+  profileActivitiInput.value = profileSubtitle.textContent;
 }
 
 const closePopup = function(elementPopup) {
@@ -24,13 +26,12 @@ const closePopup = function(elementPopup) {
 profileEditButton.addEventListener('click', openPopupProfile);
 popupCloseChangeProfile.addEventListener('click', ()=>{
    closePopup(popupChangeProfile);
-   popupFormChangeProfile.reset();
 });
 
 function handleProfileFormSubmit(evt){
   evt.preventDefault();
-  profileTitle.textContent = input[0].value;
-  profileSubtitle.textContent = input[1].value;
+  profileTitle.textContent = profileNameInput.value;
+  profileSubtitle.textContent = profileActivitiInput.value;
   closePopup(popupChangeProfile);
 }
 
@@ -75,6 +76,8 @@ const popupOpenPhoto=document.querySelector('.popup_open_photo');
 const popupCloseOpenPhoto=popupOpenPhoto.querySelector('.popup__close_open_photo');
 const popupTextOpenPhoto=popupOpenPhoto.querySelector('.popup__text_open_photo');
 const popupPhotoOpenPhoto=popupOpenPhoto.querySelector('.popup__photo_open_photo');
+const elementTitleInput=popupFormAddElement.elements.title;
+const elementLinkInput=popupFormAddElement.elements.link
 
 profileAddButton.addEventListener('click', ()=>{
   openPopup(popupAddElement);
@@ -87,31 +90,25 @@ popupCloseAddElement.addEventListener('click', ()=>{
 
 function createCard(text, links) {
   const element=elementTemplate.querySelector('.element').cloneNode(true);
-  element.querySelector('.element__photo').src=links;
-  element.querySelector('.element__photo').alt=text;
+  const elementPhoto=element.querySelector('.element__photo');
+  elementPhoto.src=links;
+  elementPhoto.alt=text;
   element.querySelector('.element__text').textContent=text;
   const elementTrash=element.querySelector('.element__trash');
   const elementLike=element.querySelector('.element__like');
-  const elementPhoto=element.querySelector('.element__photo');
- 
+   
   elementTrash.addEventListener('click', (event)=>{
     element.remove();
   });
   elementLike.addEventListener('click',()=>{
     elementLike.classList.toggle('element__like_active');
   });
-  elementPhoto.addEventListener('click',()=>{
-    openPopup(popupOpenPhoto);
-  })
-  popupCloseOpenPhoto.addEventListener('click', ()=>{
-    closePopup(popupOpenPhoto);
-  })
   
   elementPhoto.addEventListener('click', ()=>{
-    const elementText=elementPhoto.closest('.element').querySelector('.element__text-block').textContent;
-    popupTextOpenPhoto.textContent=elementText;
-    popupPhotoOpenPhoto.setAttribute('src', elementPhoto.getAttribute('src'));
-    popupPhotoOpenPhoto.setAttribute('alt', elementText);
+    popupTextOpenPhoto.textContent = text;
+    popupPhotoOpenPhoto.src = links;
+    popupPhotoOpenPhoto.alt = text;
+    openPopup(popupOpenPhoto);
   });
   return element;
   };
@@ -122,9 +119,34 @@ initialCards.forEach(function(item){
 
 const saveAddElement=function(evt){
   evt.preventDefault();
-  elements.prepend(createCard(popupFormAddElement.elements.title.value, popupFormAddElement.elements.link.value));
+  elements.prepend(createCard(elementTitleInput.value, elementLinkInput.value));
   popupFormAddElement.reset();
   closePopup(popupAddElement);
 };
-  
+
+popupCloseOpenPhoto.addEventListener('click', ()=>{
+  closePopup(popupOpenPhoto);
+})
+
 popupFormAddElement.addEventListener('submit', saveAddElement);
+
+//Закрытие попапщв по клику на оверлей и при нажатии на кнопку ESC
+
+const closePopupClickOverlayAndEsc=(elementPopup)=>{
+  elementPopup.addEventListener('click', (event)=>{
+    if (event.target !== event.currentTarget) {
+      return;
+    } else{
+      closePopup(elementPopup);
+    }
+  });
+  document.addEventListener('keyup', function(event) {
+    if (event.key === 'Escape') {
+      closePopup(elementPopup);
+    }
+  });
+};
+
+closePopupClickOverlayAndEsc(popupChangeProfile);
+closePopupClickOverlayAndEsc(popupAddElement);
+closePopupClickOverlayAndEsc(popupOpenPhoto);
