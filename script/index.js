@@ -66,7 +66,7 @@ const initialCards = [
   }
 ];
 
-const elements=document.querySelector('.elements');
+const elementss=document.querySelector('.elements');
 const profileAddButton=document.querySelector('.profile__add-button');
 const popupAddElement=document.querySelector('.popup_add_element');
 const popupFormAddElement = popupAddElement.querySelector('.popup__form_add_element');
@@ -114,12 +114,12 @@ function createCard(text, links) {
   };
   
 initialCards.forEach(function(item){
-  elements.prepend(createCard(item.name, item.link));
+  elementss.prepend(createCard(item.name, item.link));
 });
 
 const saveAddElement=function(evt){
   evt.preventDefault();
-  elements.prepend(createCard(elementTitleInput.value, elementLinkInput.value));
+  elementss.prepend(createCard(elementTitleInput.value, elementLinkInput.value));
   popupFormAddElement.reset();
   closePopup(popupAddElement);
 };
@@ -129,3 +129,24 @@ popupCloseOpenPhoto.addEventListener('click', ()=>{
 })
 
 popupFormAddElement.addEventListener('submit', saveAddElement);
+
+//Закрытие попапщв по клику на оверлей и при нажатии на кнопку ESC
+
+const closePopupClickOverlayAndEsc=(elementPopup)=>{
+  elementPopup.addEventListener('mousedown', (event)=>{
+    if (event.target !== event.currentTarget) {
+      return;
+    } else{
+      closePopup(elementPopup);
+    }
+  });
+  document.addEventListener('keyup', function(event) {
+    if (event.key === 'Escape') {
+      closePopup(elementPopup);
+    }
+  });
+};
+
+closePopupClickOverlayAndEsc(popupChangeProfile);
+closePopupClickOverlayAndEsc(popupAddElement);
+closePopupClickOverlayAndEsc(popupOpenPhoto);

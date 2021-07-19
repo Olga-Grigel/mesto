@@ -27,40 +27,40 @@
     <footer class="footer">
       <p class="footer__text">&#169; 2020 Mesto Russia</p>
     </footer>
-    <fieldset class="popup popup_change_profile">
+    <section class="popup popup_change_profile">
       <div class="popup__container popup__container_change_profile">
         <button type="button" class="popup__close popup__close_change_profile"></button>
         <h2 class="popup__title popup__title_change_profile">Редактировать профиль</h2>
-        <form class="popup__form popup__form_change_profile" name="popup__form">
+        <form class="popup__form popup__form_change_profile" name="popup__form_change_profile" novalidate>
           <label class="popup__field">
-            <input id="name" type="text" name="name" class="popup__name popup__name_change_profile" placeholder="ФИО" required minlength="2" maxlength="40">
-            <span class="popup__name-error name-name-error"></span>
+            <input id="popup__name" type="text" name="name" class="popup__name popup__name_change_profile" placeholder="ФИО" required minlength="2" maxlength="40" autocomplete="off">
+            <span class="popup__name-error"></span>
           </label>
           <label class="popup__field">
-            <input id="activiti" type="text" name="activiti" class="popup__name popup__name_change_profile" placeholder="Род деятельности" required minlength="2" maxlength="200">
-            <span class="popup__name-error activiti-name-error"></span>
+            <input id="popup__activiti" type="text" name="activiti" class="popup__name popup__name_change_profile" placeholder="Род деятельности" required minlength="2" maxlength="200" autocomplete="off">
+            <span class="popup__name-error popup__activiti-error"></span>
           </label>
           <button type="submit" class="popup__save popup__save_change_profile">Сохранить</button>
         </form>
       </div>
-    </fieldset>
-    <fieldset class="popup popup_add_element">
+    </section>
+    <section class="popup popup_add_element" novalidate>
       <div class="popup__container popup__container_add_element">
         <button type="button" class="popup__close popup__close_add_element"></button>
         <h2 class="popup__title popup__title_add_element">Новое место</h2>
-        <form class="popup__form popup__form_add_element" name="popup__form_add_element">
+        <form class="popup__form popup__form_add_element" name="popup__form_add_element" novalidate>
           <label class="popup__field">
-            <input id="title" type="text" name="title" class="popup__name popup__name_add_element" placeholder="Название" required maxlength="30">
-            <span class="popup__name-error title-name-error"></span>
+            <input id="popup__title" type="text" name="title" class="popup__name popup__name_add_element" placeholder="Название" required maxlength="30" autocomplete="off">
+            <span class="popup__name-error popup__title-error"></span>
           </label>
           <label class="popup__field">
-            <input id="link" type="url" name="link" class="popup__name popup__name_add_element" placeholder="Ссылка на картинку" required>
-            <span class="popup__name-error link-name-error"></span>
+            <input id="popup__link" type="url" name="link" class="popup__name popup__name_add_element" placeholder="Ссылка на картинку" required autocomplete="off">
+            <span class="popup__name-error popup__link-error"></span>
           </label>
-          <button type="submit" class="popup__save popup__save_add_element">Сохранить</button>
+          <button type="submit" class="popup__save popup__save_add_element">Создать</button>
         </form>
       </div>
-    </fieldset>
+    </section>
     <section class="popup popup_open_photo">
       <div class="popup__container popup__container_open_photo">
         <button type="button" class="popup__close popup__close_open_photo"></button>
@@ -79,5 +79,6 @@
       </div>
     </template>
     <script src="script/index.js"></script>
+    <script src="script/validate.js"></script>
   </body>
 </html>

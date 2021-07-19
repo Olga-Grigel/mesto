@@ -20,6 +20,19 @@
     border: 1px solid rgb(0,0,0,.2);
 }
 
+.popup__name::-webkit-input-placeholder {
+    color:#C4C4C4;
+}
+.popup__name::-moz-placeholder {
+    color:#C4C4C4;
+}
+.popup__name:-moz-placeholder {
+    color:#C4C4C4;
+}
+.popup__name:-ms-input-placeholder {
+    color:#C4C4C4;
+}
+
 @media screen and (max-width: 620px) {
     .popup__name:last-of-type {
         margin-bottom: 45px;
