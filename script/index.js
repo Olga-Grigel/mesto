@@ -8,16 +8,25 @@ const profileTitle = document.querySelector ('.profile__title');
 const profileSubtitle = document.querySelector ('.profile__subtitle');
 const profileNameInput = popupFormChangeProfile.elements.name;
 const profileActivitiInput = popupFormChangeProfile.elements.activiti;
-const popupNameChangeProfile = popupChangeProfile.querySelector('.popup__name_change_profile')
+const popupNameChangeProfile = popupChangeProfile.querySelector('.popup__name_change_profile');
+
+// Функция закрытия попапа клавишей ESC
+const closePopupClickEsc = (event)=>{
+  if (event.key === 'Escape'){
+    const popupOpened = document.querySelector('.popup_opened');
+    closePopup(popupOpened);
+    }
+};
 
 const openPopup = function(elementPopup){
   elementPopup.classList.add('popup_opened');
-  document.addEventListener('keyup', function(event) {
-    if (event.key === 'Escape') {
-      closePopup(elementPopup);
-    }
-  });
+  document.addEventListener('keyup',closePopupClickEsc);
 };
+
+const closePopup = function(elementPopup) {
+  elementPopup.classList.remove('popup_opened');
+  document.removeEventListener('keyup',closePopupClickEsc);
+}
 
 //Функция очистки попапа
 cleaningPopup = (formElement)=>{
@@ -35,10 +44,6 @@ const openPopupProfile = function(){
   profileNameInput.value = profileTitle.textContent;
   profileActivitiInput.value = profileSubtitle.textContent;
   cleaningPopup(popupChangeProfile);//Вызвала функцию очистки попапа при открытии попапа
-}
-
-const closePopup = function(elementPopup) {
-  elementPopup.classList.remove('popup_opened')
 }
 
 profileEditButton.addEventListener('click', openPopupProfile);
@@ -151,7 +156,7 @@ popupFormAddElement.addEventListener('submit', saveAddElement);
 
 //Закрытие попапoв по клику на оверлей
 
-const closePopupClickOverlayAndEsc = (elementPopup)=>{
+const closePopupClickOverlay = (elementPopup)=>{
   elementPopup.addEventListener('mousedown', (event)=>{
     if (event.target !== event.currentTarget) {
       return;
@@ -161,6 +166,6 @@ const closePopupClickOverlayAndEsc = (elementPopup)=>{
   });
 };
 
-closePopupClickOverlayAndEsc(popupChangeProfile);
-closePopupClickOverlayAndEsc(popupAddElement);
-closePopupClickOverlayAndEsc(popupOpenPhoto);
+closePopupClickOverlay(popupChangeProfile);
+closePopupClickOverlay(popupAddElement);
+closePopupClickOverlay(popupOpenPhoto);
