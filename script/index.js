@@ -1,5 +1,4 @@
 //Открытие/Закрытие попапа профиля:
-
 const profileEditButton = document.querySelector(".profile__edit-button");
 const popupChangeProfile = document.querySelector('.popup_change_profile');
 const popupCloseChangeProfile = popupChangeProfile.querySelector('.popup__close_change_profile');
@@ -61,7 +60,6 @@ function handleProfileFormSubmit(evt){
 popupFormChangeProfile.addEventListener('submit', handleProfileFormSubmit);
 
 // Карточки из массива и добавление новых карточек:
-
 const initialCards = [
   {
     name: 'Маяк',
@@ -88,69 +86,107 @@ const initialCards = [
     link: 'https://images.unsplash.com/photo-1592275142354-0d765e9a9c42?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'
   }
 ];
-
 const elementss = document.querySelector('.elements');
 const profileAddButton = document.querySelector('.profile__add-button');
 const popupAddElement = document.querySelector('.popup_add_element');
 const popupFormAddElement = popupAddElement.querySelector('.popup__form_add_element');
 const popupCloseAddElement = popupAddElement.querySelector('.popup__close_add_element');
-const elementTemplate = document.querySelector('#element-template').content;
 const popupOpenPhoto = document.querySelector('.popup_open_photo');
 const popupCloseOpenPhoto = popupOpenPhoto.querySelector('.popup__close_open_photo');
 const popupTextOpenPhoto = popupOpenPhoto.querySelector('.popup__text_open_photo');
 const popupPhotoOpenPhoto = popupOpenPhoto.querySelector('.popup__photo_open_photo');
 const elementTitleInput = popupFormAddElement.elements.title;
-const elementLinkInput = popupFormAddElement.elements.link
+const elementLinkInput = popupFormAddElement.elements.link;
 
-profileAddButton.addEventListener('click', ()=>{
-  openPopup(popupAddElement);
-  cleaningPopup(popupAddElement);//Вызвала функцию очистки попапа при открытии попапа
-});
+class Card {
+  constructor(cardSelector){
+    this._cardSelector = cardSelector;
+  }
 
-popupCloseAddElement.addEventListener('click', ()=>{
-  closePopup(popupAddElement);
-  popupFormAddElement.reset();
-});
-
-function createCard(text, links) {
-  const element = elementTemplate.querySelector('.element').cloneNode(true);
-  const elementPhoto = element.querySelector('.element__photo');
-  elementPhoto.src = links;
-  elementPhoto.alt = text;
-  element.querySelector('.element__text').textContent=text;
-  const elementTrash = element.querySelector('.element__trash');
-  const elementLike = element.querySelector('.element__like');
-   
-  elementTrash.addEventListener('click', (event)=>{
-    element.remove();
-  });
-  elementLike.addEventListener('click',()=>{
-    elementLike.classList.toggle('element__like_active');
-  });
+  _getTemplate() {
+    const cardElement = document
+    .querySelector(this._cardSelector)
+    .content
+    .querySelector('.element')
+    .cloneNode(true);
   
-  elementPhoto.addEventListener('click', ()=>{
-    popupTextOpenPhoto.textContent = text;
-    popupPhotoOpenPhoto.src = links;
-    popupPhotoOpenPhoto.alt = text;
+    return cardElement;
+  }
+
+  generateCard() {
+    this._element = this._getTemplate();
+    this._setEventListeners();
+    this._element.querySelector('.element__photo').src = this._link;
+    this._element.querySelector('.element__photo').alt = this._text;
+    this._element.querySelector('.element__text').textContent = this._text;
+
+    return this._element;
+  }
+
+  _handleOpenPopup() {
+    popupTextOpenPhoto.textContent = this._text;
+    popupPhotoOpenPhoto.src = this._link;
+    popupPhotoOpenPhoto.alt = this._text;
     openPopup(popupOpenPhoto);
-  });
-  return element;
-  };
-  
-initialCards.forEach(function(item){
-  elementss.prepend(createCard(item.name, item.link));
+  }
+
+  _setEventListeners() {
+    this._element.querySelector('.element__trash').addEventListener('click', (event)=>{
+      this._element.remove();
+    });
+    this._element.querySelector('.element__like').addEventListener('click',()=>{
+      this._element.querySelector('.element__like').classList.toggle('element__like_active');
+    });
+    profileAddButton.addEventListener('click', ()=>{
+      openPopup(popupAddElement);
+      cleaningPopup(popupAddElement);//Вызвала функцию очистки попапа при открытии попапа
+    });
+    popupCloseAddElement.addEventListener('click', ()=>{
+      closePopup(popupAddElement);
+      popupFormAddElement.reset();
+    });
+    this._element.querySelector('.element__photo').addEventListener('click', ()=>{
+      this._handleOpenPopup()
+    });
+    popupCloseOpenPhoto.addEventListener('click', ()=>{
+      closePopup(popupOpenPhoto);
+    })
+  }
+}
+//Дочерний класс по созданию карточек из ассива
+class CardArray extends Card {
+  constructor(data, cardSelector){
+    super(cardSelector);
+    this._text = data.name;
+    this._link = data.link;
+  }
+}
+
+initialCards.forEach((item)=> {
+  const card = new CardArray (item, '.element-template');
+  const cardElement = card.generateCard();
+  // Добавляем в DOM
+  elementss.prepend(cardElement);
 });
+
+//Дочерний класс по созданию новых карточек в модальном окне
+class NewCard extends Card {
+  constructor(text,link, cardSelector){
+    super(cardSelector);
+    this._text = text;
+    this._link = link
+  }
+}
 
 const saveAddElement=function(evt){
+  const newCard = new NewCard (elementTitleInput.value,elementLinkInput.value,'.element-template')
+  const newCardElement = newCard.generateCard();
+  // Добавляем в DOM
+  elementss.prepend(newCardElement);
   evt.preventDefault();
-  elementss.prepend(createCard(elementTitleInput.value, elementLinkInput.value));
   popupFormAddElement.reset();
   closePopup(popupAddElement);
 };
-
-popupCloseOpenPhoto.addEventListener('click', ()=>{
-  closePopup(popupOpenPhoto);
-})
 
 popupFormAddElement.addEventListener('submit', saveAddElement);
 
