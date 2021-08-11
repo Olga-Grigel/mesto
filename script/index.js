@@ -15,6 +15,8 @@ const popupFormAddElement = popupAddElement.querySelector('.popup__form_add_elem
 const popupOpenPhoto = document.querySelector('.popup_open_photo');
 const elementTitleInput = popupFormAddElement.elements.title;
 const elementLinkInput = popupFormAddElement.elements.link;
+const popupTextOpenPhoto = popupOpenPhoto.querySelector('.popup__text_open_photo');
+const popupPhotoOpenPhoto = popupOpenPhoto.querySelector('.popup__photo_open_photo');
 
   //Объект с селекторами для настройки валидации форм
 const validationConfig = {
@@ -57,7 +59,7 @@ const profileFormValidator = new FormValidator(validationConfig, popupFormChange
 profileFormValidator.enableValidation();
 
 const cardFormValidator = new FormValidator(validationConfig, popupFormAddElement);
-cardFormValidator .enableValidation(); 
+cardFormValidator.enableValidation(); 
 
 // Функция закрытия попапа клавишей ESC
 const closePopupClickEsc = (event)=>{
@@ -81,7 +83,7 @@ const openPopupProfile = function(){
   openPopup(popupChangeProfile);
   profileNameInput.value = profileTitle.textContent;
   profileActivitiInput.value = profileSubtitle.textContent;
-  cardFormValidator.cleaningPopup();//очистка формы при открытии
+  profileFormValidator.cleaningPopup();//очистка формы при открытии
 }
 
 profileEditButton.addEventListener('click', openPopupProfile);
@@ -97,39 +99,62 @@ function handleProfileFormSubmit(evt){
 }
 
 popupFormChangeProfile.addEventListener('submit', handleProfileFormSubmit);
-
+//функция создания карточек
+const createCard = (data)=> {
+  const card = new Card (data, '.element-template');
+  const cardElement = card.generateCard();
+  return cardElement;
+}
+  
 //Создание карточек из массива
 initialCards.forEach((item)=> {
-  const card = new Card (item.name, item.link, '.element-template');
-  const cardElement = card.generateCard();
-  elementss.prepend(cardElement);// Добавляем в DOM
+  elementss.prepend(createCard(item));// Добавляем в DOM
 });
 
 //Обработчик новой карточки
+
 popupFormAddElement.addEventListener('submit', (evt)=>{
   evt.preventDefault();
-  const newCard = new Card (elementTitleInput.value, elementLinkInput.value, '.element-template');
-  const newCardElement = newCard.generateCard();
-  elementss.prepend(newCardElement);
+  const newCadsArray = {
+    name: elementTitleInput.value,
+    link: elementLinkInput.value
+  };
+  
+  elementss.prepend(createCard(newCadsArray));
   popupFormAddElement.reset();
   closePopup(popupAddElement);
 });
+
+// Функция открытия попапа карточек (фото)
+const handleOpenPopup = (evt)=> {
+  popupTextOpenPhoto.textContent = evt.target.closest('.element').querySelector('.element__text-block').textContent;
+  popupPhotoOpenPhoto.setAttribute('src', evt.target.getAttribute('src'));
+  openPopup(popupOpenPhoto);
+}
 
 const setEventListeners = ()=> {
   const profileAddButton = document.querySelector('.profile__add-button');
   const popupCloseAddElement = document.querySelector('.popup__close_add_element');
   const popupAddElement = document.querySelector('.popup_add_element');
   const popupFormAddElement = popupAddElement.querySelector('.popup__form_add_element');
+  const popupOpenPhoto = document.querySelector('.popup_open_photo');
+  const popupCloseOpenPhoto = document.querySelector('.popup__close_open_photo');
     
   profileAddButton.addEventListener('click', ()=>{
   openPopup(popupAddElement);
-  const CleaningAddElement = new FormValidator(validationConfig, popupAddElement);
-  CleaningAddElement.cleaningPopup();
+  cardFormValidator.cleaningPopup();
   });
+
   popupCloseAddElement.addEventListener('click', ()=>{
   closePopup(popupAddElement);
   popupFormAddElement.reset();
   });
+
+  elementss.addEventListener('click', handleOpenPopup);
+
+  popupCloseOpenPhoto.addEventListener('click', ()=>{
+    closePopup(popupOpenPhoto);
+    })
 }
 setEventListeners();
 
