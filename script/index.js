@@ -15,8 +15,6 @@ const popupFormAddElement = popupAddElement.querySelector('.popup__form_add_elem
 const popupOpenPhoto = document.querySelector('.popup_open_photo');
 const elementTitleInput = popupFormAddElement.elements.title;
 const elementLinkInput = popupFormAddElement.elements.link;
-const popupTextOpenPhoto = popupOpenPhoto.querySelector('.popup__text_open_photo');
-const popupPhotoOpenPhoto = popupOpenPhoto.querySelector('.popup__photo_open_photo');
 
   //Объект с селекторами для настройки валидации форм
 const validationConfig = {
@@ -112,7 +110,6 @@ initialCards.forEach((item)=> {
 });
 
 //Обработчик новой карточки
-
 popupFormAddElement.addEventListener('submit', (evt)=>{
   evt.preventDefault();
   const newCadsArray = {
@@ -124,13 +121,6 @@ popupFormAddElement.addEventListener('submit', (evt)=>{
   popupFormAddElement.reset();
   closePopup(popupAddElement);
 });
-
-// Функция открытия попапа карточек (фото)
-const handleOpenPopup = (evt)=> {
-  popupTextOpenPhoto.textContent = evt.target.closest('.element').querySelector('.element__text-block').textContent;
-  popupPhotoOpenPhoto.setAttribute('src', evt.target.getAttribute('src'));
-  openPopup(popupOpenPhoto);
-}
 
 const setEventListeners = ()=> {
   const profileAddButton = document.querySelector('.profile__add-button');
@@ -149,8 +139,6 @@ const setEventListeners = ()=> {
   closePopup(popupAddElement);
   popupFormAddElement.reset();
   });
-
-  elementss.addEventListener('click', handleOpenPopup);
 
   popupCloseOpenPhoto.addEventListener('click', ()=>{
     closePopup(popupOpenPhoto);
