@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mesto</title>
-    <link rel="stylesheet" href="pages/index.css">
+    <link rel="stylesheet" href="./index.css">
   </head>
   <body class="page">
     <header class="header">
@@ -14,9 +14,9 @@
       <section class="profile">
         <img class="profile__avatar" src="./images/avatar.jpg" alt="Аватар">
         <div class="profile__main">
-          <h1 class="profile__title">Жак-Ив Кусто</h1>
+          <h1 class="profile__title profile__data">Жак-Ив Кусто</h1>
           <button type="button" class="profile__edit-button"></button>
-          <h2 class="profile__subtitle">Исследователь океана</h2>
+          <h2 class="profile__subtitle profile__data">Исследователь океана</h2>
         </div>
         <button type="button" class="profile__add-button"></button>
       </section>
@@ -33,11 +33,11 @@
         <h2 class="popup__title popup__title_change_profile">Редактировать профиль</h2>
         <form class="popup__form popup__form_change_profile" name="popup__form_change_profile" novalidate>
           <label class="popup__field">
-            <input id="popup__name" type="text" name="name" class="popup__name popup__name_change_profile" placeholder="ФИО" required minlength="2" maxlength="40" autocomplete="off">
+            <input id="popup__name" type="text" name="main" class="popup__name popup__name_change_profile popup__name_main" placeholder="ФИО" required minlength="2" maxlength="40" autocomplete="off">
             <span class="popup__name-error"></span>
           </label>
           <label class="popup__field">
-            <input id="popup__activiti" type="text" name="activiti" class="popup__name popup__name_change_profile" placeholder="Род деятельности" required minlength="2" maxlength="200" autocomplete="off">
+            <input id="popup__activiti" type="text" name="activiti" class="popup__name popup__name_change_profile popup__name_activiti" placeholder="Род деятельности" required minlength="2" maxlength="200" autocomplete="off">
             <span class="popup__name-error popup__activiti-error"></span>
           </label>
           <button type="submit" class="popup__save popup__save_change_profile">Сохранить</button>
@@ -50,7 +50,7 @@
         <h2 class="popup__title popup__title_add_element">Новое место</h2>
         <form class="popup__form popup__form_add_element" name="popup__form_add_element" novalidate>
           <label class="popup__field">
-            <input id="popup__title" type="text" name="title" class="popup__name popup__name_add_element" placeholder="Название" required minlength="2" maxlength="30" autocomplete="off">
+            <input id="popup__title" type="text" name="name" class="popup__name popup__name_add_element" placeholder="Название" required minlength="2" maxlength="30" autocomplete="off">
             <span class="popup__name-error popup__title-error"></span>
           </label>
           <label class="popup__field">
@@ -78,6 +78,6 @@
         </div>
       </div>
     </template>
-    <script type="module" src="script/index.js"></script>
+    <script type="module" src="./pages/index.js"></script>
   </body>
 </html>
