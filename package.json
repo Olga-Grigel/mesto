@@ -1,0 +1,36 @@
+{
+  "name": "mesto",
+  "version": "1.0.0",
+  "description": "* [Ссылка на Проект](https://olga-grigel.github.io/mesto/index.html)\r Это седьмой самостоятельный проект в рамках курса \"Вэб-разработчик\" в Яндекс.Практикум.\r Сайт содержит в себе 2 блока, в которых можно разместить информацию о себе, фото и описание к ним. Так же сайт содержит шапку  подвал и 3 попапа. Шестая проектная работа является продолжением четвертой пятой и шестой проектных работ, работа является рефакторингом кода.\r ### Применяемые техники в Проекте\r * Код и файловая структура оформлены по методике БЭМ\r * Псевдоэлементы\r * Адапивная верстка (сайт отлично работает и является зрительно привлекательным для экранов от ширины страницы в 320 px и больше)\r * Отслеживание клика по кнопке методом addEventListener\r * Свойство textContent для заполнения полей Popap и переноса информации на основную страницу\r * Использованы методы JS, такие как forEach, setAttribute, getAttribute, add, remove и т.д.\r * Применена техника валидации полей форм.\r * Добавлена возможность закрытия попапов кликом на оверлей и нажатием клавиши ESC.\r * модули\r * классы",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack --mode production",
+    "dev": "webpack serve"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Olga-Grigel/mesto.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "core-js": "^3.18.3"
+  },
+  "homepage": "https://github.com/Olga-Grigel/mesto#readme",
+  "devDependencies": {
+    "@babel/core": "^7.15.8",
+    "@babel/preset-env": "^7.15.8",
+    "autoprefixer": "^10.3.7",
+    "babel-loader": "^8.2.2",
+    "clean-webpack-plugin": "^4.0.0",
+    "css-loader": "^6.4.0",
+    "cssnano": "^5.0.8",
+    "html-webpack-plugin": "^5.3.2",
+    "mini-css-extract-plugin": "^2.4.2",
+    "postcss-loader": "^6.2.0",
+    "webpack": "^5.58.2",
+    "webpack-cli": "^4.9.0",
+    "webpack-dev-server": "^4.3.1"
+  }
+}

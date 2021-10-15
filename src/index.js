@@ -1,9 +1,10 @@
-import { Card } from '../components/Card.js';
-import { FormValidator } from '../components/FormValidator.js';
-import { PopupWithImage } from '../components/PopupWithImage.js';
-import { PopupWithForm } from '../components/PopupWithForm.js';
-import { Section } from '../components/Section.js';
-import { UserInfo } from '../components/UserInfo.js';
+import './index.css'; // добавьте импорт главного файла стилей
+import { Card } from './components/Card.js';
+import { FormValidator } from './components/FormValidator.js';
+import { PopupWithImage } from './components/PopupWithImage.js';
+import { PopupWithForm } from './components/PopupWithForm.js';
+import { Section } from './components/Section.js';
+import { UserInfo } from './components/UserInfo.js';
 import {
   profileEditButton,
   profileAddButton,
@@ -12,7 +13,8 @@ import {
   profileActivitiInput,
   popupFormAddElement,
   validationConfig,
-  initialCards} from '../utils/constants.js'
+  initialCards
+} from './utils/constants.js'
 
 // Активация валидации
 const profileFormValidator = new FormValidator(validationConfig, popupFormChangeProfile);
@@ -26,7 +28,8 @@ const createCard = (data) => {
   const card = new Card({
     data, handleCardClick: () => {
       const popupWithImage = new PopupWithImage(data, '.popup_open_photo')
-      popupWithImage.open()
+      popupWithImage.open();
+      popupWithImage.setEventListeners()
     }
   },
     '.element-template');
@@ -75,9 +78,8 @@ profileEditButton.addEventListener('click', () => {
   const dataUserInfo = userInfo.getUserInfo();
   profileNameInput.value = dataUserInfo.profile__title;
   profileActivitiInput.value = dataUserInfo.profile__subtitle;
-  
+
 });
 profileAddButton.addEventListener('click', () => {
   classFormAddElement.open();
 });
-

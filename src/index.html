@@ -1,83 +1,91 @@
 <!DOCTYPE html>
 <html lang="ru">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mesto</title>
-    <link rel="stylesheet" href="./index.css">
-  </head>
-  <body class="page">
-    <header class="header">
-      <img class="header__logo" src="./images/logo_header.svg" alt="Логотип">
-    </header>
-    <main class="content">
-      <section class="profile">
-        <img class="profile__avatar" src="./images/avatar.jpg" alt="Аватар">
-        <div class="profile__main">
-          <h1 class="profile__title profile__data">Жак-Ив Кусто</h1>
-          <button type="button" class="profile__edit-button"></button>
-          <h2 class="profile__subtitle profile__data">Исследователь океана</h2>
-        </div>
-        <button type="button" class="profile__add-button"></button>
-      </section>
-      <section class="elements">
 
-      </section>
-    </main>
-    <footer class="footer">
-      <p class="footer__text">&#169; 2020 Mesto Russia</p>
-    </footer>
-    <section class="popup popup_change_profile">
-      <div class="popup__container popup__container_change_profile">
-        <button type="button" class="popup__close popup__close_change_profile"></button>
-        <h2 class="popup__title popup__title_change_profile">Редактировать профиль</h2>
-        <form class="popup__form popup__form_change_profile" name="popup__form_change_profile" novalidate>
-          <label class="popup__field">
-            <input id="popup__name" type="text" name="main" class="popup__name popup__name_change_profile popup__name_main" placeholder="ФИО" required minlength="2" maxlength="40" autocomplete="off">
-            <span class="popup__name-error"></span>
-          </label>
-          <label class="popup__field">
-            <input id="popup__activiti" type="text" name="activiti" class="popup__name popup__name_change_profile popup__name_activiti" placeholder="Род деятельности" required minlength="2" maxlength="200" autocomplete="off">
-            <span class="popup__name-error popup__activiti-error"></span>
-          </label>
-          <button type="submit" class="popup__save popup__save_change_profile">Сохранить</button>
-        </form>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mesto</title>
+</head>
+
+<body class="page">
+  <header class="header">
+    <img class="header__logo" src="<%=require('./images/logo_header.svg')%>" alt="Логотип">
+  </header>
+  <main class="content">
+    <section class="profile">
+      <img class="profile__avatar" src="<%=require('./images/avatar.jpg')%>" alt="Аватар">
+      <div class="profile__main">
+        <h1 class="profile__title profile__data">Жак-Ив Кусто</h1>
+        <button type="button" class="profile__edit-button"></button>
+        <h2 class="profile__subtitle profile__data">Исследователь океана</h2>
       </div>
+      <button type="button" class="profile__add-button"></button>
     </section>
-    <section class="popup popup_add_element">
-      <div class="popup__container popup__container_add_element">
-        <button type="button" class="popup__close popup__close_add_element"></button>
-        <h2 class="popup__title popup__title_add_element">Новое место</h2>
-        <form class="popup__form popup__form_add_element" name="popup__form_add_element" novalidate>
-          <label class="popup__field">
-            <input id="popup__title" type="text" name="name" class="popup__name popup__name_add_element" placeholder="Название" required minlength="2" maxlength="30" autocomplete="off">
-            <span class="popup__name-error popup__title-error"></span>
-          </label>
-          <label class="popup__field">
-            <input id="popup__link" type="url" name="link" class="popup__name popup__name_add_element" placeholder="Ссылка на картинку" required autocomplete="off">
-            <span class="popup__name-error popup__link-error"></span>
-          </label>
-          <button type="submit" class="popup__save popup__save_add_element">Создать</button>
-        </form>
-      </div>
+    <section class="elements">
+
     </section>
-    <section class="popup popup_open_photo">
-      <div class="popup__container popup__container_open_photo">
-        <button type="button" class="popup__close popup__close_open_photo"></button>
-        <img  class="popup__photo popup__photo_open_photo" src="#" alt="Фото">
-        <h2 class="popup__text popup__text_open_photo"></h2>
+  </main>
+  <footer class="footer">
+    <p class="footer__text">&#169; 2020 Mesto Russia</p>
+  </footer>
+  <section class="popup popup_change_profile">
+    <div class="popup__container popup__container_change_profile">
+      <button type="button" class="popup__close popup__close_change_profile"></button>
+      <h2 class="popup__title popup__title_change_profile">Редактировать профиль</h2>
+      <form class="popup__form popup__form_change_profile" name="popup__form_change_profile" novalidate>
+        <label class="popup__field">
+          <input id="popup__name" type="text" name="main"
+            class="popup__name popup__name_change_profile popup__name_main" placeholder="ФИО" required minlength="2"
+            maxlength="40" autocomplete="off">
+          <span class="popup__name-error"></span>
+        </label>
+        <label class="popup__field">
+          <input id="popup__activiti" type="text" name="activiti"
+            class="popup__name popup__name_change_profile popup__name_activiti" placeholder="Род деятельности" required
+            minlength="2" maxlength="200" autocomplete="off">
+          <span class="popup__name-error popup__activiti-error"></span>
+        </label>
+        <button type="submit" class="popup__save popup__save_change_profile">Сохранить</button>
+      </form>
+    </div>
+  </section>
+  <section class="popup popup_add_element">
+    <div class="popup__container popup__container_add_element">
+      <button type="button" class="popup__close popup__close_add_element"></button>
+      <h2 class="popup__title popup__title_add_element">Новое место</h2>
+      <form class="popup__form popup__form_add_element" name="popup__form_add_element" novalidate>
+        <label class="popup__field">
+          <input id="popup__title" type="text" name="name" class="popup__name popup__name_add_element"
+            placeholder="Название" required minlength="2" maxlength="30" autocomplete="off">
+          <span class="popup__name-error popup__title-error"></span>
+        </label>
+        <label class="popup__field">
+          <input id="popup__link" type="url" name="link" class="popup__name popup__name_add_element"
+            placeholder="Ссылка на картинку" required autocomplete="off">
+          <span class="popup__name-error popup__link-error"></span>
+        </label>
+        <button type="submit" class="popup__save popup__save_add_element">Создать</button>
+      </form>
+    </div>
+  </section>
+  <section class="popup popup_open_photo">
+    <div class="popup__container popup__container_open_photo">
+      <button type="button" class="popup__close popup__close_open_photo"></button>
+      <img class="popup__photo popup__photo_open_photo" src="#" alt="Фото">
+      <h2 class="popup__text popup__text_open_photo"></h2>
+    </div>
+  </section>
+  <template id="element-template" class="element-template">
+    <div class="element">
+      <button type="button" class="element__trash"></button>
+      <img class="element__photo" src="#" alt="Фото">
+      <div class="element__text-block">
+        <h2 class="element__text"></h2>
+        <button type="button" class="element__like"></button>
       </div>
-    </section>
-    <template id="element-template" class="element-template">
-      <div class="element">
-        <button type="button" class="element__trash"></button>
-        <img class="element__photo" src="#" alt="Фото">
-        <div class="element__text-block">
-          <h2 class="element__text"></h2>
-          <button type="button" class="element__like"></button>
-        </div>
-      </div>
-    </template>
-    <script type="module" src="./pages/index.js"></script>
-  </body>
+    </div>
+  </template>
+  <!--<script type="module" src="./pages/index.js"></script>-->
+</body>
+
 </html>
