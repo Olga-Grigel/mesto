@@ -1,10 +1,10 @@
 import './index.css'; // добавьте импорт главного файла стилей
-import { Card } from './components/Card.js';
-import { FormValidator } from './components/FormValidator.js';
-import { PopupWithImage } from './components/PopupWithImage.js';
-import { PopupWithForm } from './components/PopupWithForm.js';
-import { Section } from './components/Section.js';
-import { UserInfo } from './components/UserInfo.js';
+import { Card } from '../components/Card.js';
+import { FormValidator } from '../components/FormValidator.js';
+import { PopupWithImage } from '../components/PopupWithImage.js';
+import { PopupWithForm } from '../components/PopupWithForm.js';
+import { Section } from '../components/Section.js';
+import { UserInfo } from '../components/UserInfo.js';
 import {
   profileEditButton,
   profileAddButton,
@@ -14,7 +14,7 @@ import {
   popupFormAddElement,
   validationConfig,
   initialCards
-} from './utils/constants.js'
+} from '../utils/constants.js'
 
 // Активация валидации
 const profileFormValidator = new FormValidator(validationConfig, popupFormChangeProfile);
@@ -24,12 +24,13 @@ const cardFormValidator = new FormValidator(validationConfig, popupFormAddElemen
 cardFormValidator.enableValidation();
 
 //функция создания карточек
+const popupWithImage = new PopupWithImage('.popup_open_photo');
+popupWithImage.setEventListeners();
+
 const createCard = (data) => {
   const card = new Card({
     data, handleCardClick: () => {
-      const popupWithImage = new PopupWithImage(data, '.popup_open_photo')
-      popupWithImage.open();
-      popupWithImage.setEventListeners()
+      popupWithImage.open(data);
     }
   },
     '.element-template');
@@ -78,8 +79,10 @@ profileEditButton.addEventListener('click', () => {
   const dataUserInfo = userInfo.getUserInfo();
   profileNameInput.value = dataUserInfo.profile__title;
   profileActivitiInput.value = dataUserInfo.profile__subtitle;
+  profileFormValidator.resetValidation();
 
 });
 profileAddButton.addEventListener('click', () => {
   classFormAddElement.open();
+  cardFormValidator.resetValidation();
 });
