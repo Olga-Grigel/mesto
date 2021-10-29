@@ -8,7 +8,7 @@
     border: none;
     background-color: #fff;
     padding: 0;
-    margin-left: 25px;
+    text-align: center;
 }
 
 .element__like:hover {

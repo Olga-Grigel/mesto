@@ -5,15 +5,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mesto</title>
+  <link rel="stylesheet" href="pages/index.css">
 </head>
 
 <body class="page">
   <header class="header">
-    <img class="header__logo" src="<%=require('./images/logo_header.svg')%>" alt="Логотип">
+    <img class="header__logo" src="./images/logo_header.svg" alt="Логотип">
+    <!--<img class="header__logo" src="<%=require('./images/logo_header.svg')%>" alt="Логотип">-->
   </header>
   <main class="content">
     <section class="profile">
-      <img class="profile__avatar" src="<%=require('./images/avatar.jpg')%>" alt="Аватар">
+      <img class="profile__avatar" src="./images/avatar.jpg" alt="Аватар">
+      <!--<img class="profile__avatar" src="<%=require('./images/avatar.jpg')%>" alt="Аватар">-->
       <div class="profile__main">
         <h1 class="profile__title profile__data">Жак-Ив Кусто</h1>
         <button type="button" class="profile__edit-button"></button>
@@ -75,16 +78,29 @@
       <h2 class="popup__text popup__text_open_photo"></h2>
     </div>
   </section>
+  <section class="popup popup_with_sabmit">
+    <div class="popup__container popup__container_with_sabmit">
+      <button type="button" class="popup__close popup__close_with_sabmit"></button>
+      <form class="popup__form popup__form_with_sabmit" name="popup__form_with_sabmit" novalidate>
+        <h2 class="popup__title popup__title_with_sabmit">Вы уверены?</h2>
+        <button type="submit" class="popup__save popup__save_with_sabmit">Да</button>
+    </form>
+    </div>
+  </section>
   <template id="element-template" class="element-template">
     <div class="element">
       <button type="button" class="element__trash"></button>
       <img class="element__photo" src="#" alt="Фото">
       <div class="element__text-block">
         <h2 class="element__text"></h2>
-        <button type="button" class="element__like"></button>
+        <div class="element__likes">
+          <button type="button" class="element__like"></button>
+          <p class="element__number-likes">0</p>
+        </div>
       </div>
     </div>
   </template>
+  <script type="module" src="./pages/index.js"></script>
 </body>
 
 </html>

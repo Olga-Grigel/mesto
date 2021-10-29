@@ -1,6 +1,6 @@
 .profile__main {
     display: flex;
-    max-width: 400px;
+    max-width: 336px;
     flex-wrap: wrap;
     white-space: nowrap;
     overflow: hidden;

@@ -16,7 +16,6 @@ export class PopupWithForm extends Popup {
         });
 
         // возвращаем объект значений
-        console.log(this._formValues)
         return this._formValues;
     }
     close() {
