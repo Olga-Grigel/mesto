@@ -5,6 +5,7 @@
     color: #FFFFFF;
     max-width: 880px;
     justify-content: flex-start;
+    position: relative;
 }
 
 @media screen and (max-width: 950px) {

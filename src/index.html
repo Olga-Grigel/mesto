@@ -5,18 +5,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mesto</title>
-  <link rel="stylesheet" href="pages/index.css">
 </head>
 
 <body class="page">
   <header class="header">
-    <img class="header__logo" src="./images/logo_header.svg" alt="Логотип">
-    <!--<img class="header__logo" src="<%=require('./images/logo_header.svg')%>" alt="Логотип">-->
+    <img class="header__logo" src="<%=require('./images/logo_header.svg')%>" alt="Логотип">
   </header>
   <main class="content">
     <section class="profile">
-      <img class="profile__avatar" src="./images/avatar.jpg" alt="Аватар">
-      <!--<img class="profile__avatar" src="<%=require('./images/avatar.jpg')%>" alt="Аватар">-->
+      <img class="profile__avatar" src="<%=require('./images/avatar.jpg')%>" alt="Аватар">
+      <div class="profile__ikon"></div>
       <div class="profile__main">
         <h1 class="profile__title profile__data">Жак-Ив Кусто</h1>
         <button type="button" class="profile__edit-button"></button>
@@ -84,7 +82,21 @@
       <form class="popup__form popup__form_with_sabmit" name="popup__form_with_sabmit" novalidate>
         <h2 class="popup__title popup__title_with_sabmit">Вы уверены?</h2>
         <button type="submit" class="popup__save popup__save_with_sabmit">Да</button>
-    </form>
+      </form>
+    </div>
+  </section>
+  <section class="popup popup_change_avatar">
+    <div class="popup__container popup__container_change_avatar">
+      <button type="button" class="popup__close popup__close_change_avatar"></button>
+      <h2 class="popup__title popup__title_change_avatar">Обновить аватар</h2>
+      <form class="popup__form popup__form_change_avatar" name="popup__form_change_avatar" novalidate>
+        <label class="popup__field">
+          <input id="popup__linkavatar" type="url" name="linkavatar" class="popup__name popup__name_change_avatar"
+            placeholder="Ссылка" required autocomplete="off">
+          <span class="popup__name-error popup__linkavatar-error"></span>
+        </label>
+        <button type="submit" class="popup__save popup__save_change_avatar">Сохранить</button>
+      </form>
     </div>
   </section>
   <template id="element-template" class="element-template">
@@ -100,7 +112,5 @@
       </div>
     </div>
   </template>
-  <script type="module" src="./pages/index.js"></script>
 </body>
-
 </html>
