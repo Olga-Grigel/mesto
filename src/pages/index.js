@@ -137,8 +137,10 @@ const popupAddElement = new PopupWithForm({
     document.querySelector('.popup__save_add_element').textContent = 'Сохранение...'
     api.sendNewCard(formData)
       .then((data) => {
+        console.log(data)
+        const card = [data].map((item) => ({ name: item.name, link: item.link, likes: item.likes, likesId: item.likes.map((item) => ({ likesid: item._id })), ownerId: item.owner._id, id: item._id }));
         // передаём экземпляру методу создания карточки с помощью класса Card данные
-        section([data]);
+        section(card);
       })
       .catch((err) => {
         alert(err);
