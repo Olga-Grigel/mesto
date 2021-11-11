@@ -7,9 +7,9 @@ export class PopupWithImage extends Popup {
         this._popupPhotoOpenPhoto = this._popup.querySelector('.popup__photo_open_photo');
         
     }
-    open(data) {
-        this._text = data.name;
-        this._link = data.link;
+    open({text, link}) {
+        this._text = text;
+        this._link = link;
         super.open();
         this._popupTextOpenPhoto.textContent = this._text;
         this._popupPhotoOpenPhoto.src = this._link;

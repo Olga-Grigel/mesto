@@ -25,11 +25,9 @@ export class Popup {
         });
 
         this._popup.addEventListener('mousedown', (event) => {
-            if (event.target !== event.currentTarget) {
-                return;
-            } else {
+            if (event.target === event.currentTarget) {
                 this.close();
-            }
+              }
         });
     }
 }

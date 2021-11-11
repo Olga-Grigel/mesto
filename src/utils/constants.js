@@ -8,7 +8,6 @@ export const profileActivitiInput = popupFormChangeProfile.elements.activiti;
 export const popupAddElement = document.querySelector('.popup_add_element');
 export const popupFormAddElement = popupAddElement.querySelector('.popup__form_add_element');
 
-
 //Объект с селекторами для настройки валидации форм
 export const validationConfig = {
   formSelector: '.popup__form',
