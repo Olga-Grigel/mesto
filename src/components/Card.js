@@ -39,7 +39,6 @@ export class Card {
     this._elementPhoto = this._element.querySelector('.element__photo');
     this._elementNumberLikes = this._element.querySelector('.element__number-likes')
     if (this._ownerId != this._userId) {
-      console.log(this._ownerId)
       this._element.querySelector('.element__trash').classList.add('element__trash_none');
     };
     this._elementPhoto.src = this._link;
