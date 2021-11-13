@@ -22,6 +22,9 @@ export class PopupWithForm extends Popup {
         this._popupForm.reset();
         super.close();
     }
+    updateButtonState(isLoading) {
+        this._popup.querySelector('.popup__save').textContent = isLoading
+    }
     setEventListeners() {
         this._popupForm = this._popup.querySelector('.popup__form');
         this._popupForm.addEventListener('submit', (evt) => {

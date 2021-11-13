@@ -27,7 +27,7 @@ export class Api {
                 return Promise.reject(`Ошибка: ${res.status}`);
             })
     };
-    sendDataProfile(name, activity) {
+    sendDataProfile({name, activity}) {
         return fetch(this._url + '/cohort-29/users/me', {
             method: 'PATCH',
             headers: this._headers,

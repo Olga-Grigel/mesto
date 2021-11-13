@@ -52,14 +52,18 @@ export class Card {
   removeCard() {
     this._element.remove();
   }
+  toggleLikeState(res) {
+    this._elementNumberLikes.textContent = res.likes.length;
+    this._elementLike.classList.toggle('element__like_active');
+  }
   _setEventListeners() {
 
     this._elementTrash.addEventListener('click', () => {
-      this._handleDeleteIconClick(this._idCard)
+      this._handleDeleteIconClick()
     });
 
     this._elementLike.addEventListener('click', () => {
-      this._likeCard(this._idCard, this._likes, this._elementLike, this._elementNumberLikes);
+      this._likeCard();
     });
 
     this._elementPhoto.addEventListener('click', () => {

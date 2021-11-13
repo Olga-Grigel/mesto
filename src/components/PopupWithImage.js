@@ -5,9 +5,9 @@ export class PopupWithImage extends Popup {
         super(popupSelector);
         this._popupTextOpenPhoto = this._popup.querySelector('.popup__text_open_photo');
         this._popupPhotoOpenPhoto = this._popup.querySelector('.popup__photo_open_photo');
-        
+
     }
-    open({text, link}) {
+    open({ text, link }) {
         this._text = text;
         this._link = link;
         super.open();
@@ -16,4 +16,3 @@ export class PopupWithImage extends Popup {
         this._popupPhotoOpenPhoto.alt = this._text;
     }
 };
-

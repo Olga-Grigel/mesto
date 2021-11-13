@@ -31,23 +31,16 @@ avatarFormValidator.enableValidation();
 const popupWithImage = new PopupWithImage('.popup_open_photo');
 popupWithImage.setEventListeners();
 
-
 const popupWithSabmit = new PopupWithSubmit({
   popupSelector: '.popup_with_sabmit'
 });
 popupWithSabmit.setEventListeners();
 
-//Функция с экземпляром класса Section для добавления новых карточек в разметку
-const section = (items) => {
-  const uneversalSection = new Section({
-    items: items,
-    renderer: (item) => {
-      const cardElement = createCard(item);
-      uneversalSection.addItem(cardElement);
-    }
-  }, '.elements')
-  uneversalSection.renderItems();
-};
+//экземпляр класса Section для добавления карточек в разметку
+let cardSection = new Section({
+  items: [],
+  renderer: () => { }
+}, '.elements')
 
 //Экземпляр класса Card
 const createCard = (data) => {
@@ -55,13 +48,13 @@ const createCard = (data) => {
     data,
 
     handleCardClick: () => {
-      popupWithImage.open();
+      popupWithImage.open({ text: data.name, link: data.link });
     },
 
-    handleDeleteIconClick: (idCard) => {
+    handleDeleteIconClick: () => {
       popupWithSabmit.open();
       popupWithSabmit.setSubmitAction(() => {
-        api.deleteCards(idCard)
+        api.deleteCards(data.id)
           .then(() => {
             card.removeCard();
             popupWithSabmit.close();
@@ -70,11 +63,10 @@ const createCard = (data) => {
       });
     },
 
-    likeCard(idCard, likes, elementLike, elementNumberLikes) {
-      api.changeLikeCardStatus(idCard, card.isLiked(), likes)
+    likeCard() {
+      api.changeLikeCardStatus(data.id, card.isLiked(), data.likes)
         .then((res) => {
-          elementNumberLikes.textContent = res.likes.length;
-          elementLike.classList.toggle('element__like_active');
+          card.toggleLikeState(res);
         })
         .catch((err) => {
           alert(err);
@@ -96,19 +88,7 @@ const api = new Api({
 });
 
 //удаление карточки после подтверждения
-popupWithSabmit.setEventListeners(
-  //Передаем коллбек удаление карточки с сервера и из разметки
-  () => {
-
-    api.deleteCards(item.id)
-      .then((res) => {
-        card.removeCard();
-        popupWithSabmit.close();
-      })
-      .catch((err) => {
-        alert(err);
-      });
-  });
+popupWithSabmit.setEventListeners();
 
 let userId = null
 
@@ -118,14 +98,20 @@ Promise.all([ //в Promise.all передаем массив промисов к
 ])
   .then((values) => {
     //получение данных профиля
-    userInfo.setUserInfo(values[0].name, values[0].about);
-    userInfo.setUserAvatar(values[0].avatar)
+    userInfo.setUserInfo({ name: values[0].name, about: values[0].about, avatar: values[0].avatar });
     userId = values[0]._id;
 
     //получение всех карточек
     const dataCard = values[1].map((item) => ({ name: item.name, link: item.link, likes: item.likes, likesId: item.likes.map((item) => ({ likesid: item._id })), ownerId: item.owner._id, id: item._id }));
     //Создание экземпляра Section для добавления в разметку всех карточек с сервера
-    section(dataCard);
+    cardSection = new Section({
+      items: dataCard,
+      renderer: (item) => {
+        const cardElement = createCard(item);
+        cardSection.addItem(cardElement);
+      }
+    }, '.elements');
+    cardSection.renderItems()
   })
   .catch((err) => { alert(err); })
 
@@ -134,18 +120,18 @@ const popupAddElement = new PopupWithForm({
   popupSelector: '.popup_add_element',
   submitForm: (formData) => {
     //Добавление новой карточки на сервер
-    document.querySelector('.popup__save_add_element').textContent = 'Сохранение...'
+    popupAddElement.updateButtonState('Сохранение...')
     api.sendNewCard(formData)
       .then((data) => {
-        const card = [data].map((item) => ({ name: item.name, link: item.link, likes: item.likes, likesId: item.likes.map((item) => ({ likesid: item._id })), ownerId: item.owner._id, id: item._id }));
         // передаём экземпляру методу создания карточки с помощью класса Card данные
-        section(card);
+        const cardElement = createCard({ name: data.name, link: data.link, likes: data.likes, ownerId: data.owner._id });
+        cardSection.addItem(cardElement);
       })
       .catch((err) => {
         alert(err);
       })
       .finally(() => {
-        document.querySelector('.popup__save_add_element').textContent = 'Создать'
+        popupAddElement.updateButtonState('Создать')
       })
   }
 });
@@ -171,23 +157,21 @@ profileAddButton.addEventListener('click', () => {
   cardFormValidator.resetValidation();
 });
 
-
-
 //Экземпляр класса PopupWithForm для попапа изменения профиля
 const popupChangeProfile = new PopupWithForm({
   popupSelector: '.popup_change_profile',
   submitForm: (data) => {
-    document.querySelector('.popup__save_change_profile').textContent = 'Сохранение...'
+    popupChangeProfile.updateButtonState('Сохранение...')
     //Отправка данных профиля на сервер
-    api.sendDataProfile(profileNameInput.value, profileActivitiInput.value)
+    api.sendDataProfile({ name: profileNameInput.value, activity: profileActivitiInput.value })
       .then((data) => {
-        userInfo.setUserInfo(data.name, data.about);
+        userInfo.setUserInfo({ name: data.name, about: data.about });
       })
       .catch((err) => {
         alert(err)
       })
       .finally(() => {
-        document.querySelector('.popup__save_change_profile').textContent = 'Сохранить'
+        popupChangeProfile.updateButtonState('Сохранить')
       })
   }
 });
@@ -203,16 +187,16 @@ document.querySelector('.profile__ikon').addEventListener('click', () => {
 const popupChangeAvatar = new PopupWithForm({
   popupSelector: '.popup_change_avatar',
   submitForm: (data) => {
-    document.querySelector('.popup__save_change_avatar').textContent = 'Сохранение...'
+    popupChangeAvatar.updateButtonState('Сохранение...')
     api.sendAvatarProfile(data.linkavatar)
       .then((result) => {
-        userInfo.setUserAvatar(result.avatar)
+        userInfo.setUserInfo({ avatar: result.avatar })
       })
       .catch((err) => {
         alert(err);
       })
       .finally(() => {
-        document.querySelector('.popup__save_change_avatar').textContent = 'Сохранить'
+        popupChangeAvatar.updateButtonState('Сохранить')
       })
   }
 });
