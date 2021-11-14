@@ -12,19 +12,13 @@ export class UserInfo {
         };
         return this._formValues;
     }
-    //Первый вариант не могу применить, так как у меня в двух местах textContent нужно поменять,
-    // а в одном src это никак не унифицировать(или может я опять что-то не поняла?), 
-    //сделаю вторым вариантом.
+    //Спасибо большое за такое подробное объяснение, я поняла!
     setUserInfo(name, about) {
         this._title.textContent = name;
         this._subtitle.textContent = about;
     }
     setUserAvatar(avatar) {
         this._avatar.src = avatar;
-    }
-
-    setUserAvatar(linkavatar) {
-        //получаем объект с ключами и устанавливаем их в разметку
-        this._avatar.src = linkavatar
-    }
+    }//только сейчас увидела еще один setUserAvatar, спасибо, ох уже эти ночные посиделки, голова уже чумная, 
+    //столько лишней работы и времени потратила из-за этого метода, на неделю уже опаздываю
 }
