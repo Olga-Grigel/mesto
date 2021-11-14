@@ -39,7 +39,10 @@ popupWithSabmit.setEventListeners();
 //экземпляр класса Section для добавления карточек в разметку
 let cardSection = new Section({
   items: [],
-  renderer: () => { }
+  renderer: (item) => {
+    const cardElement = createCard(item);
+    cardSection.addItem(cardElement);
+  }
 }, '.elements')
 
 //Экземпляр класса Card
@@ -98,20 +101,14 @@ Promise.all([ //в Promise.all передаем массив промисов к
 ])
   .then((values) => {
     //получение данных профиля
-    userInfo.setUserInfo({ name: values[0].name, about: values[0].about, avatar: values[0].avatar });
+    userInfo.setUserInfo(values[0].name, values[0].about);
+    userInfo.setUserAvatar(values[0].avatar);
     userId = values[0]._id;
 
     //получение всех карточек
     const dataCard = values[1].map((item) => ({ name: item.name, link: item.link, likes: item.likes, likesId: item.likes.map((item) => ({ likesid: item._id })), ownerId: item.owner._id, id: item._id }));
     //Создание экземпляра Section для добавления в разметку всех карточек с сервера
-    cardSection = new Section({
-      items: dataCard,
-      renderer: (item) => {
-        const cardElement = createCard(item);
-        cardSection.addItem(cardElement);
-      }
-    }, '.elements');
-    cardSection.renderItems()
+    cardSection.renderItems(dataCard)
   })
   .catch((err) => { alert(err); })
 
@@ -165,7 +162,7 @@ const popupChangeProfile = new PopupWithForm({
     //Отправка данных профиля на сервер
     api.sendDataProfile({ name: profileNameInput.value, activity: profileActivitiInput.value })
       .then((data) => {
-        userInfo.setUserInfo({ name: data.name, about: data.about });
+        userInfo.setUserInfo(data.name, data.about);
       })
       .catch((err) => {
         alert(err)
@@ -190,7 +187,7 @@ const popupChangeAvatar = new PopupWithForm({
     popupChangeAvatar.updateButtonState('Сохранение...')
     api.sendAvatarProfile(data.linkavatar)
       .then((result) => {
-        userInfo.setUserInfo({ avatar: result.avatar })
+        userInfo.setUserAvatar(result.avatar);
       })
       .catch((err) => {
         alert(err);

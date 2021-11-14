@@ -22,9 +22,9 @@ export class PopupWithForm extends Popup {
         this._popupForm.reset();
         super.close();
     }
-    updateButtonState(isLoading) {
-        this._popup.querySelector('.popup__save').textContent = isLoading
-    }
+    updateButtonState(buttonTitle) {
+        this._popup.querySelector('.popup__save').textContent = buttonTitle
+    }//так как по заданию не везде название кнопок "сохранить"(в двух местах "сохранить", в одном "создать") вариант с флагом не подошел
     setEventListeners() {
         this._popupForm = this._popup.querySelector('.popup__form');
         this._popupForm.addEventListener('submit', (evt) => {
